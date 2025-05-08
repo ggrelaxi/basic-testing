@@ -4,15 +4,15 @@ import fs from 'node:fs';
 import fsPromises from 'node:fs/promises';
 import { readFileAsynchronously, doStuffByTimeout, doStuffByInterval } from '.';
 
+beforeAll(() => {
+  jest.useFakeTimers();
+});
+
+afterAll(() => {
+  jest.useRealTimers();
+});
+
 describe('doStuffByTimeout', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
-
   test('should set timeout with provided callback and timeout', () => {
     // Write your test here
     const spySetTimeout = jest.spyOn(global, 'setTimeout');
@@ -45,14 +45,6 @@ describe('doStuffByTimeout', () => {
 });
 
 describe('doStuffByInterval', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
-  });
-
   test('should set interval with provided callback and timeout', () => {
     // Write your test here
     const spySetInterval = jest.spyOn(global, 'setInterval');

@@ -8,8 +8,7 @@ const getDataFromApi = async (relativePath: string) => {
     baseURL: 'https://jsonplaceholder.typicode.com',
   });
   const response = await axiosClient.get(relativePath);
-  // @ts-ignore
-  return response
+  return response;
 };
 
 export const throttledGetDataFromApi = throttle(getDataFromApi, THROTTLE_TIME);

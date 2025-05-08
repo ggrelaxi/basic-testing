@@ -4,6 +4,7 @@ import {
   InsufficientFundsError,
   SynchronizationFailedError,
 } from '.';
+import lodash from 'lodash';
 
 describe('BankAccount', () => {
   test('should create account with initial balance', () => {
@@ -79,11 +80,21 @@ describe('BankAccount', () => {
   test('fetchBalance should return number in case if request did not failed', async () => {
     // Write your tests here
     const account = getBankAccount(100);
+    jest.mock('lodash');
+    lodash.random = jest
+      .fn()
+      .mockReturnValueOnce(50)
+      .mockReturnValueOnce(0)
+      .mockReturnValueOnce(75)
+      .mockReturnValueOnce(1);
+    const balanceResponseFirst = await account.fetchBalance();
 
-    const balanceResponse = await account.fetchBalance();
+    expect(balanceResponseFirst).toBe(null);
 
-    if (balanceResponse !== null) {
-      expect(typeof balanceResponse === 'number').toBe(true);
+    const balanceResponseSecond = await account.fetchBalance();
+
+    if (balanceResponseSecond !== null) {
+      expect(typeof balanceResponseSecond === 'number').toBe(true);
     }
   });
 

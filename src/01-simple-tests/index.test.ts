@@ -45,12 +45,12 @@ describe('simpleCalculator tests', () => {
     expect(simpleCalculator({ a: '2', b: '3', action: Action.Add })).toEqual(
       null,
     );
-    expect(simpleCalculator({ a: true, b: [], action: Action.Subtract })).toEqual(
-      null,
-    );
-    expect(simpleCalculator({ a: {}, b: null, action: Action.Multiply })).toEqual(
-      null,
-    );
+    expect(
+      simpleCalculator({ a: true, b: [], action: Action.Subtract }),
+    ).toEqual(null);
+    expect(
+      simpleCalculator({ a: {}, b: null, action: Action.Multiply }),
+    ).toEqual(null);
     expect(
       simpleCalculator({ a: undefined, b: Symbol('1'), action: Action.Divide }),
     ).toEqual(null);
